@@ -63,7 +63,6 @@ const RepositoryList = () => {
       ItemSeparatorComponent={ItemSeparator}
       // other props
       renderItem={({item}) => {
-        console.log('item',item);
         return(
           <RepositoryItem item={item}/>
 
