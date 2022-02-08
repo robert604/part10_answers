@@ -16,18 +16,7 @@ const theme = {
       height:50
     }
   },
-  flexContainerRow:{
-    flexDirection: 'row'
-  },
-  flexContainerCol:{
-    flexDirection: 'column'
-  },
-  flex1:{
-    flex:1
-  },
-  flex0:{
-    flex:0
-  }
+
 
 }
 
