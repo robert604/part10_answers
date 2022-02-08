@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   tab: {
-    backgroundColor: theme.colors.background
+    backgroundColor: theme.color.secondary
   },
   text:{
-    color:theme.colors.textPrimary
+    color:theme.color.textLight
   },
   heading: {
     fontSize: theme.fontSizes.heading
