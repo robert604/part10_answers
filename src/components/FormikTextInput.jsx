@@ -19,17 +19,18 @@ const FormikTextInput = ({ name, ...props }) => {
 
   return (
     <>
-      <View style={[gs.borderShape,gs.borderColorTertiary,gs.margin5]}>
-      <TextInput
+      <View style={[gs.margin5]}>
+      <TextInput style={[gs.borderShape,showError ? gs.borderColorRed : gs.borderColorTertiary,gs.padding5]}
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}
         error={showError}
-        style={gs.marginLeft10}
+
         {...props}
       />
+      {showError && <Text style={[gs.marginTop5,gs.colorTextError]}>{meta.error}</Text>}      
       </View>
-      {showError && <Text style={styles.errorText}>{meta.error}</Text>}
+
     </>
   );
 };

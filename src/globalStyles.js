@@ -39,6 +39,9 @@ const globalStyles = StyleSheet.create({
   borderColorTertiary:{
     borderColor:theme.color.tertiary
   },
+  borderColorRed:{
+    borderColor:'red'
+  },
   colorPrimary:{
     color:theme.color.primary
   },
@@ -48,8 +51,23 @@ const globalStyles = StyleSheet.create({
   margin5:{
     margin:5
   },
+  margin1:{
+    margin:1
+  },  
+  marginTop5:{
+    marginTop:5
+  },
+  padding1:{
+    padding:1
+  },
+  padding5:{
+    padding:5
+  },  
   colorTextLight:{
     color:theme.color.textLight
+  },
+  colorTextError:{
+    color:theme.color.textError
   },
   heading: {
     fontSize: theme.fontSizes.heading

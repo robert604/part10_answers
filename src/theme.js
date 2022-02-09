@@ -5,6 +5,7 @@ const theme = {
     textLight: '#e0e0e0',
     textMedium:'#808080',
     textDark:'#000000',
+    textError:'red',
     primary: '#0366d6',
     tertiary:'#a0a0a0'
   },

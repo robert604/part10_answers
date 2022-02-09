@@ -1,5 +1,6 @@
 import { Formik } from "formik";
-import { View,Button,Text,TouchableOpacity } from "react-native";
+import { View,Text,TouchableOpacity } from "react-native";
+import * as yup from 'yup';
 import FormikTextInput from "./FormikTextInput";
 import gs from '../globalStyles';
 
@@ -10,16 +11,12 @@ const SignIn = () => {
         username:'',
         password:''
       }}
-      validate={(values) => {
-        const errors ={};
-        if(!values.username) {
-          errors.username = 'Required';
-        }
-        if(!values.password) {
-          errors.password = 'Required';
-        }        
-        return errors;
-      }}      
+      validationSchema={yup.object().shape({
+        username:yup.string()
+        .required('Username is required'),
+        password:yup.string()
+        .required('Password is required')
+      })}     
       onSubmit={(values) => {
         console.log('values',values);
       }}
