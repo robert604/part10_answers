@@ -5,7 +5,8 @@ const theme = {
     textLight: '#e0e0e0',
     textMedium:'#808080',
     textDark:'#000000',
-    primary: '#0366d6'
+    primary: '#0366d6',
+    tertiary:'#a0a0a0'
   },
   fontSizes:{
     heading:24

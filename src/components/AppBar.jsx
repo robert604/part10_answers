@@ -1,6 +1,6 @@
 import { View,StyleSheet,ScrollView } from 'react-native';
 import AppBarTab from './AppBarTab';
-import gs from '../globalStyles';
+//import gs from '../globalStyles';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
