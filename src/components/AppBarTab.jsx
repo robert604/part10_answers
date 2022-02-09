@@ -2,6 +2,7 @@ import {StyleSheet,View,Text} from 'react-native';
 import { Link } from 'react-router-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
+import gs from '../globalStyles';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,19 +14,14 @@ const styles = StyleSheet.create({
     paddingLeft:10,
     paddingRight:10
   },
-  text:{
-    color:theme.color.textLight
-  },
-  heading: {
-    fontSize: theme.fontSizes.heading
-  }
+
 });
 
 const AppBarTab = ({title,path}) => {
 
   return(
     <View style={styles.tab}>
-      <Link to={path}><Text style={[styles.text,styles.heading]}>{title}</Text></Link>
+      <Link to={path}><Text style={[gs.text,gs.colorTextLight,gs.heading]}>{title}</Text></Link>
     </View>
   );
   /*return (

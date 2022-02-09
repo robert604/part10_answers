@@ -23,8 +23,8 @@ const RepositoryItem = ({item}) => {
     textMedium:{
       color:theme.color.textMedium
     },
-    textDark:{
-      color:theme.color.textDark,
+    textPrimary:{
+      color:theme.color.textPrimary,
       fontWeight:'700',      
     },
     textCentered:{
@@ -45,8 +45,8 @@ const RepositoryItem = ({item}) => {
       <View style={[gs.flexContainerRow,gs.paddingLeft10]}>
         <Image style={styles.iconRegular}source={{uri:item.ownerAvatarUrl}}></Image>
         <View style={[gs.flexContainerCol,gs.flex0,gs.flexStart,gs.paddingLeft10]}>
-          <Text style={styles.textDark}>{`${item.fullName}`}</Text>
-          <Text style={styles.textMedium}>{`${item.description}`}</Text>
+          <Text style={[gs.text,styles.textPrimary]}>{`${item.fullName}`}</Text>
+          <Text style={[gs.text,styles.textMedium]}>{`${item.description}`}</Text>
           <View  style={[styles.roundedBox]}>
             <Text style={[styles.textLight,gs.flex0]}>{`${item.language}`}</Text>
           </View>          
@@ -54,20 +54,20 @@ const RepositoryItem = ({item}) => {
       </View>
       <View style={[gs.flexContainerRow]}>
         <View style={[gs.flexContainerCol,gs.flex1]}>
-          <Text style={[styles.textDark,styles.textCentered]}>{`${item.stargazersCount}k`}</Text>
-          <Text style={[styles.textMedium,styles.textCentered]}>Stars</Text>
+          <Text style={[gs.text,styles.textPrimary,styles.textCentered]}>{`${item.stargazersCount}k`}</Text>
+          <Text style={[gs.text,styles.textMedium,styles.textCentered]}>Stars</Text>
         </View>
         <View style={[gs.flexContainerCol,gs.flex1]}>       
-          <Text style={[styles.textDark,styles.textCentered]}>{`${item.forksCount}k`}</Text>
-          <Text style={[styles.textMedium,styles.textCentered]}>Forks</Text>          
+          <Text style={[gs.text,styles.textPrimary,styles.textCentered]}>{`${item.forksCount}k`}</Text>
+          <Text style={[gs.text,styles.textMedium,styles.textCentered]}>Forks</Text>          
         </View>        
         <View style={[gs.flexContainerCol,gs.flex1]}>         
-          <Text style={[styles.textDark,styles.textCentered]}>{`${item.reviewCount}`}</Text>
-          <Text style={[styles.textMedium,styles.textCentered]}>Reviews</Text>          
+          <Text style={[gs.text,styles.textPrimary,styles.textCentered]}>{`${item.reviewCount}`}</Text>
+          <Text style={[gs.text,styles.textMedium,styles.textCentered]}>Reviews</Text>          
         </View>        
         <View style={[gs.flexContainerCol,gs.flex1]}>      
-          <Text style={[styles.textDark,styles.textCentered]}>{`${item.ratingAverage}`}</Text> 
-          <Text style={[styles.textMedium,styles.textCentered]}>Rating</Text>          
+          <Text style={[gs.text,styles.textPrimary,styles.textCentered]}>{`${item.ratingAverage}`}</Text> 
+          <Text style={[gs.text,styles.textMedium,styles.textCentered]}>Rating</Text>          
         </View>
       </View>            
     </View>

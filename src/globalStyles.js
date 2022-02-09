@@ -2,6 +2,12 @@ import { StyleSheet } from "react-native";
 import theme from './theme';
 
 const globalStyles = StyleSheet.create({
+  text:{
+    color:theme.color.textPrimary,
+    fontSize:theme.fontSizes.body,
+    fontFamily:theme.fonts.platformSpecific,
+    fontWeight:theme.fontWeights.normal
+  },
   flexContainerRow:{
     flexDirection: 'row'
   },
