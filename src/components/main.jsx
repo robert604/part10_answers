@@ -6,7 +6,6 @@ import { Navigate, Route,Routes } from 'react-router-native';
 import SignIn from './SignIn';
 
 
-
 const styles = StyleSheet.create({
   container: {
     //marginTop: Constants.statusBarHeight,
@@ -20,6 +19,8 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
+
+  console.log('starting main');
   return (
     <View style={styles.container}>
       <AppBar />

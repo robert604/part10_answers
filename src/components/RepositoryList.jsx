@@ -5,6 +5,7 @@ import RepositoryItem from './RepositoryItem';
 import {useQuery} from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
 
+
 const styles = StyleSheet.create({
   separator: {
     height: 10,
@@ -31,12 +32,14 @@ const RepositoryList = () => {
     fetchRepositories();
   }, []);
 */
+
   const {data,error,loading} = useQuery(GET_REPOSITORIES,{
-    fetchPolicy:'cache-and-network'
+    fetchPolicy: 'cache-and-network'
   });
 
   const repositories = loading ? null : data.repositories;
 
+  console.log('repository list');
   // Get the nodes from the edges array
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)

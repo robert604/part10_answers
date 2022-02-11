@@ -17,9 +17,12 @@ export const GET_REPOSITORIES = gql`
           id,
           name,
           ownerName,
-          
+
         }
       }
     }
   }
-`;
+
+
+`
+

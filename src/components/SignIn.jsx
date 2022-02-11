@@ -3,8 +3,11 @@ import { View,Text,TouchableOpacity } from "react-native";
 import * as yup from 'yup';
 import FormikTextInput from "./FormikTextInput";
 import gs from '../globalStyles';
+import useSignIn from "../hooks/useSignIn";
 
 const SignIn = () => {
+  const [signIn] = useSignIn();
+
   return(
     <Formik
       initialValues={{
@@ -17,8 +20,14 @@ const SignIn = () => {
         password:yup.string()
         .required('Password is required')
       })}     
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         console.log('values',values);
+        try {
+          const {data} = await signIn({username:values.username,password:values.password});
+          console.log('got signin data',data);
+        } catch(error) {
+          console.log(error);
+        }
       }}
     >
       {({handleSubmit}) => {
