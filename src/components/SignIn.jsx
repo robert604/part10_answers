@@ -4,8 +4,10 @@ import * as yup from 'yup';
 import FormikTextInput from "./FormikTextInput";
 import gs from '../globalStyles';
 import useSignIn from "../hooks/useSignIn";
+import AuthStorage from "../utils/authStorage";
 
 const SignIn = () => {
+
   const [signIn] = useSignIn();
 
   return(
@@ -21,10 +23,13 @@ const SignIn = () => {
         .required('Password is required')
       })}     
       onSubmit={async (values) => {
-        console.log('values',values);
+        //console.log('values',values);
+        const atstore = new AuthStorage();
+        //console.log('accesstoken',await atstore.getAccessToken());
         try {
           const {data} = await signIn({username:values.username,password:values.password});
           console.log('got signin data',data);
+          atstore.setAccessToken(data.authenticate.accessToken);
         } catch(error) {
           console.log(error);
         }
