@@ -4,10 +4,10 @@ import * as yup from 'yup';
 import FormikTextInput from "./FormikTextInput";
 import gs from '../globalStyles';
 import useSignIn from "../hooks/useSignIn";
-import AuthStorage from "../utils/authStorage";
+import { useNavigate } from "react-router-native";
 
 const SignIn = () => {
-
+  const navigate = useNavigate();
   const [signIn] = useSignIn();
 
   return(
@@ -24,12 +24,10 @@ const SignIn = () => {
       })}     
       onSubmit={async (values) => {
         //console.log('values',values);
-        const atstore = new AuthStorage();
-        //console.log('accesstoken',await atstore.getAccessToken());
         try {
-          const {data} = await signIn({username:values.username,password:values.password});
-          console.log('got signin data',data);
-          atstore.setAccessToken(data.authenticate.accessToken);
+          await signIn({username:values.username,password:values.password});
+          navigate('/');
+
         } catch(error) {
           console.log(error);
         }
