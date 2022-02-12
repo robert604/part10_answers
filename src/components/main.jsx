@@ -1,10 +1,15 @@
 //import Constants from 'expo-constants';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import { Navigate, Route,Routes } from 'react-router-native';
 import SignIn from './SignIn';
+import { useQuery } from '@apollo/client';
+import { ME } from '../graphql/queries';
+import { useEffect, useState,createContext } from 'react';
+import { DataProvider } from '../contexts/dataContext';
 
+export const dataContext = createContext();
 
 const styles = StyleSheet.create({
   container: {
@@ -19,11 +24,24 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
+  const [signedIn,setSignedIn] = useState(false);
+  const {data} = useQuery(ME);  
 
-  console.log('starting main');
+  useEffect(() => {
+    if(data) {
+      setSignedIn(data.me ? true : false);
+    }
+  },[data])
+
+  const theData = {signedIn};
+
+
   return (
     <View style={styles.container}>
-      <AppBar />
+      <DataProvider value={theData}>
+        <AppBar />
+      </DataProvider>
+
       <View style={styles.separator} />      
       <Routes>
         <Route path='/' element={<RepositoryList/>} exact />

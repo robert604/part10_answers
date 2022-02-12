@@ -27,7 +27,6 @@ const SignIn = () => {
         try {
           await signIn({username:values.username,password:values.password});
           navigate('/');
-
         } catch(error) {
           console.log(error);
         }

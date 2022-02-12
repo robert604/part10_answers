@@ -17,11 +17,14 @@ const styles = StyleSheet.create({
 
 });
 
-const AppBarTab = ({title,path}) => {
-
+const AppBarTab = ({func,title,path}) => {
+  //console.log('starting appbartab',title);
+  const pressFunc = func ? func : ()=>{};
   return(
     <View style={styles.tab}>
-      <Link to={path}><Text style={[gs.text,gs.colorTextLight,gs.heading]}>{title}</Text></Link>
+      <Link to={path} onPress={pressFunc}>
+        <Text style={[gs.text,gs.colorTextLight,gs.heading]}>{title}</Text>
+      </Link>
     </View>
   );
   /*return (

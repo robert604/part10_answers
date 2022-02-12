@@ -1,7 +1,10 @@
 import { View,StyleSheet,ScrollView } from 'react-native';
 import AppBarTab from './AppBarTab';
-//import gs from '../globalStyles';
 import theme from '../theme';
+import useAuthStorage from '../hooks/useAuthStorage';
+import { useApolloClient } from "@apollo/client";
+import { useNavigate } from "react-router-native";
+import { useDataContext } from '../contexts/dataContext';
 
 const styles = StyleSheet.create({
   appBar:{
@@ -11,12 +14,27 @@ const styles = StyleSheet.create({
 
 
 const AppBar = () => {
+  const {signedIn} = useDataContext();
+
+  const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
+  const navigate = useNavigate();
+
+  const signOutFunc = async () => {
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+    navigate('/');    
+  };
+
   return (
     <View style={[styles.appBar]}>
       <ScrollView horizontal>
         <AppBarTab title='Repositories' path='/'/>
-        <AppBarTab title='Sign In' path ='/signin'/>
-               
+        { signedIn
+          ? <AppBarTab func={signOutFunc} title='Sign Out' path = '/' />        
+          : <AppBarTab title='Sign In' path ='/signin'/>
+        }
+
       </ScrollView>
     </View>
   );
