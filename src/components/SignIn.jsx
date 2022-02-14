@@ -6,11 +6,8 @@ import gs from '../globalStyles';
 import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-native";
 
-const SignIn = () => {
-  const navigate = useNavigate();
-  const [signIn] = useSignIn();
-
-  return(
+export const Form = ({onSubmit}) => {
+  return (
     <Formik
       initialValues={{
         username:'',
@@ -22,15 +19,7 @@ const SignIn = () => {
         password:yup.string()
         .required('Password is required')
       })}     
-      onSubmit={async (values) => {
-        //console.log('values',values);
-        try {
-          await signIn({username:values.username,password:values.password});
-          navigate('/');
-        } catch(error) {
-          console.log(error);
-        }
-      }}
+      onSubmit={onSubmit}
     >
       {({handleSubmit}) => {
         return(
@@ -45,18 +34,36 @@ const SignIn = () => {
               secureTextEntry
             />
             <View>
-              <TouchableOpacity   style={[gs.margin5,gs.backgroundColorPrimary,gs.borderShape,gs.borderColorPrimary]}
+              <TouchableOpacity testID='pressable'  style={[gs.margin5,gs.backgroundColorPrimary,gs.borderShape,gs.borderColorPrimary]}
                 title='Sign in'
                 onPress={handleSubmit}
               ><Text style={[gs.colorTextLight,gs.bold,gs.textAlignCenter]}>Sign in</Text>
               </TouchableOpacity>
             </View>
           </View>
-
         );
       }}
 
     </Formik>
+  );
+}
+
+
+const SignIn = () => {
+  const navigate = useNavigate();
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    try {
+      await signIn({username:values.username,password:values.password});
+      navigate('/');
+    } catch(error) {
+      console.log(error);
+    }
+  };
+
+  return(
+    <Form onSubmit={onSubmit} />
   );
 }
 
