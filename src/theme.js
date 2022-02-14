@@ -2,12 +2,11 @@ import {Platform} from 'react-native';
 const theme = {
   color:{
     secondary: '#202020',
-    textLight: '#e0e0e0',
     textMedium:'#808080',
-    textPrimary:'#24292e',
     textError:'red',
     primary: '#0366d6',
-    tertiary:'#a0a0a0'
+    tertiary:'#a0a0a0',
+    light:'#e0e0e0'
   },
   fontSizes:{
     body:14,
@@ -27,10 +26,8 @@ const theme = {
     bold: '700',
   },  
   icon:{
-    regular:{
-      width:50,
-      height:50
-    }
+    regularSize:50,
+
   },
 
 

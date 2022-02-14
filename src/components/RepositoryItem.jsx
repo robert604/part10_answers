@@ -1,5 +1,5 @@
 import {View,Text,Image,StyleSheet} from 'react-native';
-import theme from '../theme';
+
 import gs from '../globalStyles';
 
 
@@ -17,8 +17,6 @@ const RepositoryItem = ({item}) => {
       justifyContent:'center',
     },
 
-    iconRegular:theme.icon.regular,
-
 
   });
 
@@ -26,10 +24,10 @@ const RepositoryItem = ({item}) => {
   return(
     <View testID='repositoryItem' styles={[]}>
       <View style={[gs.flexContainerRow,gs.paddingLeft10]}>
-        <Image style={styles.iconRegular}source={{uri:item.ownerAvatarUrl}}></Image>
+        <Image style={gs.iconRegular}source={{uri:item.ownerAvatarUrl}}></Image>
         <View style={[gs.flexContainerCol,gs.flex0,gs.flexStart,gs.paddingLeft10]}>
           <Text style={[gs.text,gs.textPrimary]}>{`${item.fullName}`}</Text>
-          <Text style={[gs.text,gs.textMedium]}>{`${item.description}`}</Text>
+          <Text style={[{flexGrow:1},gs.text,gs.textMedium]}>{`${item.description}`}</Text>
           <View  style={[gs.roundedBox]}>
             <Text style={[gs.textLight,gs.flex0]}>{`${item.language}`}</Text>
           </View>          
