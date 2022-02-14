@@ -84,6 +84,26 @@ const globalStyles = StyleSheet.create({
   bold:{
     fontWeight:'bold'
   },
+  textLight:{
+    color:theme.color.textLight,
+    fontWeight:'bold'
+  },
+  textMedium:{
+    color:theme.color.textMedium
+  },
+  textPrimary:{
+    color:theme.color.textPrimary,
+    fontWeight:'700',      
+  },
+  roundedBox:{
+    borderRadius:5,
+    borderWidth:1,
+    borderColor:theme.color.primary,
+    backgroundColor:theme.color.primary,
+    padding:6,
+    alignItems:'center',
+    justifyContent:'center',
+  },  
 });
 
 export default globalStyles;

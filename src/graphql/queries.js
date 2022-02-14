@@ -33,3 +33,23 @@ export const ME = gql`
   }
 `
 
+export const REPOSITORY = gql`
+  query repository($repositoryId:ID!) {
+    repository(id:$repositoryId) {
+      stargazersCount,
+      forksCount,
+      ownerAvatarUrl,
+      fullName,
+      description,
+      language,
+      reviewCount,
+      ratingAverage,
+      createdAt,
+      id,
+      name,
+      ownerName,
+      url
+    }
+  }
+`
+
