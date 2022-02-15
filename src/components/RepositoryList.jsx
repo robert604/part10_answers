@@ -5,9 +5,10 @@ import RepositoryItem from './RepositoryItem';
 import {useQuery} from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
 import { useNavigate } from 'react-router-native';
-import { Menu,Button,Provider as PaperProvider} from 'react-native-paper';
+import { Menu,Button,Provider as PaperProvider,Searchbar} from 'react-native-paper';
 import { useState } from 'react';
 import gs from '../globalStyles';
+import {useDebounce} from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -18,29 +19,29 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({repositories,orders,orderBy,setOrderBy}) => {
+export const RepositoryListContainer = ({repositories,orders,orderBy,setOrderBy
+    ,searchQuery,setSearchQuery}) => {
   const navigate = useNavigate();
 
-  const [ordering,setOrdering] = useState({orderingName:'latest first'});
   const [showMenu,setShowMenu] = useState(false);
 
   const openMenu = () => setShowMenu(true);
   const closeMenu = () => setShowMenu(false);
   const latestFirst = () => {
-    setOrdering({orderingName:'latest first'});
     setOrderBy(orders.latest);
     closeMenu();
   }
   const highestRatedFirst = () => {
-    setOrdering({orderingName:'highest rated first'});
     setOrderBy(orders.highestRating);
     closeMenu();    
   }
   const lowestRatedFirst = () => {
-    setOrdering({orderingName:'lowest rated first'});
     setOrderBy(orders.lowestRating);
     closeMenu();    
-  }    
+  }
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+  } 
   // Get the nodes from the edges array
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
@@ -50,20 +51,27 @@ export const RepositoryListContainer = ({repositories,orders,orderBy,setOrderBy}
       <FlatList
         data={repositoryNodes}
         ListHeaderComponent={
-          <Menu
-            visible={showMenu}
-            onDismiss={closeMenu}
-            anchor={
-              <Pressable style={[gs.flexContainerRow,gs.roundedBox]} onPress={openMenu}>
-                <Text style={gs.textLight}>{`Ordered by ${orderBy.orderingName}`}</Text>
-                <Button style={gs.colorLight} icon='menu-down-outline'></Button>
-              </Pressable>
-            }
-          >
-            <Menu.Item onPress={latestFirst} title='Latest first'/>
-            <Menu.Item onPress={highestRatedFirst} title='Highest rated first'/>
-            <Menu.Item onPress={lowestRatedFirst} title='Lowest rated first'/>                    
-          </Menu>
+          <View>
+            <Searchbar
+              placeHolder='Search'
+              onChangeText={onChangeSearch}
+              value={searchQuery}
+            />
+            <Menu
+              visible={showMenu}
+              onDismiss={closeMenu}
+              anchor={
+                <Pressable style={[gs.flexContainerRow,gs.box]} onPress={openMenu}>
+                  <Text style={gs.colorSecondary}>{`Ordered by ${orderBy.orderingName}`}</Text>
+                  <Button style={gs.colorLight} icon='menu-down-outline'></Button>
+                </Pressable>
+              }
+            >
+              <Menu.Item onPress={latestFirst} title='Latest first'/>
+              <Menu.Item onPress={highestRatedFirst} title='Highest rated first'/>
+              <Menu.Item onPress={lowestRatedFirst} title='Lowest rated first'/>                    
+            </Menu>
+          </View>
         }
         ItemSeparatorComponent={ItemSeparator}
         // other props
@@ -123,15 +131,19 @@ const RepositoryList = () => {
     latest: {orderBy:'CREATED_AT',orderDirection:'DESC',orderingName:'latest first'},
   }
 
+  const [searchQuery,setSearchQuery] = useState('');
+  const [debouncedQuery] = useDebounce(searchQuery,500);
   const [orderBy,setOrderBy] = useState(orders.latest);
   const {data,error,loading} = useQuery(GET_REPOSITORIES,{
     fetchPolicy: 'cache-and-network',
-    variables:orderBy
+    variables:{...orderBy,searchKeyword:searchQuery}
   });
 
   const repositories = loading ? null : data.repositories;
 
-  return <RepositoryListContainer repositories={repositories} orders={orders} orderBy={orderBy} setOrderBy={setOrderBy}/>;
+  return <RepositoryListContainer repositories={repositories}
+   orders={orders} orderBy={orderBy} setOrderBy={setOrderBy}
+   searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>;
 };
 
 export default RepositoryList;

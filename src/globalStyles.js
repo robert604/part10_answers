@@ -121,6 +121,13 @@ const globalStyles = StyleSheet.create({
     color:theme.color.secondary,
     fontWeight:'700',      
   },
+  box:{
+    margin:5,    
+
+    padding:6,
+    alignItems:'center',
+    justifyContent:'center',
+  },  
   roundedBox:{
     margin:5,    
     borderRadius:5,
@@ -130,16 +137,6 @@ const globalStyles = StyleSheet.create({
     padding:6,
     alignItems:'center',
     justifyContent:'center',
-  },
-  roundedBox2:{
-    margin:5,
-    backgroundColor:theme.color.primary,
-    borderWidth:2,
-    borderRadius:5,      
-    borderColor:theme.color.primary,
-    padding:6,
-    alignItems:'center',
-    justifyContent:'center',      
   },
   iconRegular:{
     width:theme.icon.regularSize,
