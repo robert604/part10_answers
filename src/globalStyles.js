@@ -122,6 +122,7 @@ const globalStyles = StyleSheet.create({
     fontWeight:'700',      
   },
   roundedBox:{
+    margin:5,    
     borderRadius:5,
     borderWidth:1,
     borderColor:theme.color.primary,
@@ -129,6 +130,16 @@ const globalStyles = StyleSheet.create({
     padding:6,
     alignItems:'center',
     justifyContent:'center',
+  },
+  roundedBox2:{
+    margin:5,
+    backgroundColor:theme.color.primary,
+    borderWidth:2,
+    borderRadius:5,      
+    borderColor:theme.color.primary,
+    padding:6,
+    alignItems:'center',
+    justifyContent:'center',      
   },
   iconRegular:{
     width:theme.icon.regularSize,
@@ -141,7 +152,8 @@ const globalStyles = StyleSheet.create({
     borderWidth:3,
     alignItems:'center',
     justifyContent:'center',
-  }
-});
+  },
 
+});
+//gs.margin5,gs.backgroundColorPrimary,gs.borderShape,gs.borderColorPrimary
 export default globalStyles;

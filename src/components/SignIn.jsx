@@ -34,7 +34,7 @@ export const Form = ({onSubmit}) => {
               secureTextEntry
             />
             <View>
-              <TouchableOpacity testID='pressable'  style={[gs.margin5,gs.backgroundColorPrimary,gs.borderShape,gs.borderColorPrimary]}
+              <TouchableOpacity testID='pressable'  style={[gs.roundedBox]}
                 title='Sign in'
                 onPress={handleSubmit}
               ><Text style={[gs.colorTextLight,gs.bold,gs.textAlignCenter]}>Sign in</Text>

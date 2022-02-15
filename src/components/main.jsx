@@ -9,6 +9,7 @@ import { useQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import { useEffect, useState,createContext } from 'react';
 import { DataProvider } from '../contexts/dataContext';
+import CreateReview from './CreateReview';
 
 export const dataContext = createContext();
 
@@ -49,6 +50,7 @@ const Main = () => {
         <Route path='/signin' element={<SignIn/>} exact />
         <Route path='*' element={<Navigate to='/' replace/>} />
         <Route path='/repository/:id' element={<RepositoryItemDetail/>} />
+        <Route path='/review' element={<CreateReview />} />
       </Routes>
     </View>
   );

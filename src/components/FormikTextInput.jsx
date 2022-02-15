@@ -20,7 +20,7 @@ const FormikTextInput = ({ name, ...props }) => {
   return (
     <>
       <View style={[gs.margin5]}>
-      <TextInput style={[gs.text,gs.borderShape,showError ? gs.borderColorRed : gs.borderColorTertiary,gs.padding5]}
+      <TextInput {...props} style={[gs.text,gs.borderShape,showError ? gs.borderColorRed : gs.borderColorTertiary,gs.padding5]}
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}
