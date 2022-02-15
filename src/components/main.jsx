@@ -10,6 +10,7 @@ import { ME } from '../graphql/queries';
 import { useEffect, useState,createContext } from 'react';
 import { DataProvider } from '../contexts/dataContext';
 import CreateReview from './CreateReview';
+import SignUp from './SignUp';
 
 export const dataContext = createContext();
 
@@ -51,6 +52,7 @@ const Main = () => {
         <Route path='*' element={<Navigate to='/' replace/>} />
         <Route path='/repository/:id' element={<RepositoryItemDetail/>} />
         <Route path='/review' element={<CreateReview />} />
+        <Route path='/signup' element={<SignUp/>} exact />        
       </Routes>
     </View>
   );

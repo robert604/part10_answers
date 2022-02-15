@@ -5,7 +5,7 @@ import FormikTextInput from './FormikTextInput';
 import gs from '../globalStyles';
 import { useMutation } from '@apollo/client';
 import { CREATE_REVIEW } from '../graphql/mutations';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-native';
 
 const CreateReview = () => {
