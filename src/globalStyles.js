@@ -94,7 +94,7 @@ const globalStyles = StyleSheet.create({
   padding5:{
     padding:5
   },  
-  colorTextLight:{
+  colorLight:{
     color:theme.color.light
   },
   colorTextError:{

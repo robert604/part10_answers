@@ -23,7 +23,7 @@ const AppBarTab = ({func,title,path}) => {
   return(
     <View style={styles.tab}>
       <Link to={path} onPress={pressFunc}>
-        <Text style={[gs.text,gs.colorTextLight,gs.heading]}>{title}</Text>
+        <Text style={[gs.text,gs.colorLight,gs.heading]}>{title}</Text>
       </Link>
     </View>
   );
