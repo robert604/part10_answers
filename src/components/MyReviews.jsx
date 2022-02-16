@@ -12,8 +12,11 @@ const MyReviews = () => {
     includeReviews: true,
     first:5,    
   }
-  const queryResult = useQuery(ME,{variables});  
-  const {data,loading,fetchMore} = queryResult;
+  const queryResult = useQuery(ME,{
+    variables,
+    fetchPolicy: 'cache-and-network',
+  });  
+  const {data,loading,fetchMore,refetch} = queryResult;
 
   useEffect(() => {
     if(data) {
@@ -36,7 +39,7 @@ const MyReviews = () => {
   const reviews = meData.reviews.edges.map(obj=>obj.node);
   return (
     <View style={[gs.flexContainerCol,gs.margin10,gs.backgroundColorLight]}>
-      <ReviewListContainer reviews={reviews} onEndReached={onEndReached} myReviews={true}/>
+      <ReviewListContainer reviews={reviews} onEndReached={onEndReached} myReviews={true} refetch={refetch}/>
     </View>
 
   );

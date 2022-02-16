@@ -60,7 +60,10 @@ const globalStyles = StyleSheet.create({
   },
   colorTertiary:{
     color:theme.color.tertiary
-  },  
+  },
+  colorRed:{
+    color:'red'
+  },
   backgroundColorPrimary:{
     backgroundColor:theme.color.primary
   },
@@ -72,7 +75,10 @@ const globalStyles = StyleSheet.create({
   },
   backgroundColorWhite:{
     backgroundColor:'white'
-  },  
+  },
+  backgroundColorRed:{
+    backgroundColor:'red'
+  },   
   marginLeft10:{
     marginLeft:10
   },
