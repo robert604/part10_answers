@@ -30,12 +30,57 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `
-
+/*
 export const ME = gql`
-  query {
+  query me($includeReviews:Boolean = false){
     me {
       id,
       username,
+      reviews @include(if:$includeReviews) {
+        edges {
+          node {
+            id
+            repository {
+              fullName
+            }
+            text
+            rating
+            createdAt
+          }
+        }
+      }
+    }
+  }
+`
+*/
+
+export const ME = gql`
+  query me($includeReviews:Boolean = false,$first:Int,$after:String){
+    me {
+      id,
+      username,
+      reviews(first:$first,after:$after) @include(if:$includeReviews){
+        pageInfo {
+          hasNextPage
+          startCursor
+          endCursor
+        }
+        edges {
+          node {
+            id,
+            text,
+            rating,
+            createdAt,
+            user {
+              id,
+              username
+            }
+            repository {
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 `

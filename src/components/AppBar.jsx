@@ -35,6 +35,10 @@ const AppBar = () => {
           : null
         }
         { signedIn
+          ? <AppBarTab title='My reviews' path='/myreviews'/> 
+          : null
+        }        
+        { signedIn
           ? <AppBarTab func={signOutFunc} title='Sign Out' path = '/' />
           : <AppBarTab title='Sign In' path ='/signin'/>
         }
