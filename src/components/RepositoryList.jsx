@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({repositories,orders,orderBy,setOrderBy
+export const RepositoryListContainer = ({repositories,onEndReach
+    ,orders,orderBy,setOrderBy
     ,searchQuery,setSearchQuery}) => {
   const navigate = useNavigate();
 
@@ -50,6 +51,8 @@ export const RepositoryListContainer = ({repositories,orders,orderBy,setOrderBy
     <PaperProvider>
       <FlatList
         data={repositoryNodes}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
         ListHeaderComponent={
           <View>
             <Searchbar
@@ -134,16 +137,39 @@ const RepositoryList = () => {
   const [searchQuery,setSearchQuery] = useState('');
   const [debouncedQuery] = useDebounce(searchQuery,500);
   const [orderBy,setOrderBy] = useState(orders.latest);
-  const {data,error,loading} = useQuery(GET_REPOSITORIES,{
+
+  const variables = {...orderBy,searchKeyword:debouncedQuery,first:8};
+
+  const {data,fetchMore,loading} = useQuery(GET_REPOSITORIES,{
     fetchPolicy: 'cache-and-network',
-    variables:{...orderBy,searchKeyword:searchQuery}
+    variables:variables
   });
+
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variables,
+      },
+    });
+  };
+
+  const onEndReach = () => {
+    handleFetchMore();
+  }
 
   const repositories = loading ? null : data.repositories;
 
   return <RepositoryListContainer repositories={repositories}
-   orders={orders} orderBy={orderBy} setOrderBy={setOrderBy}
-   searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>;
+    onEndReach={onEndReach}    
+    orders={orders} orderBy={orderBy} setOrderBy={setOrderBy}
+    searchQuery={debouncedQuery} setSearchQuery={setSearchQuery}/>;
 };
 
 export default RepositoryList;

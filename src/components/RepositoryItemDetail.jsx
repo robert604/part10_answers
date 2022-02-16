@@ -32,10 +32,13 @@ const ReviewItem = ({item}) => {
 
 const RepositoryItemDetail = () => {
   const params = useParams();
-  const {data} = useQuery(REPOSITORY,{
-    variables:{
-      repositoryId:params.id,     
-    },
+  const variables = {
+    repositoryId:params.id,
+    first:5 
+  };
+
+  const {data,loading,fetchMore} = useQuery(REPOSITORY,{
+    variables,
     fetchPolicy:'network-only'
   });
 
@@ -48,6 +51,17 @@ const RepositoryItemDetail = () => {
     Linking.openURL(item.url);
   };
 
+  const onEndReached = () => {
+    const canFetchMore = !loading && data.repository.reviews.pageInfo.hasNextPage;
+    if(!canFetchMore) return;
+    fetchMore({
+      variables:{
+        ...variables,
+        after:data.repository.reviews.pageInfo.endCursor
+      }
+    })
+  }
+
   const Separator = () => <View style={gs.height10}/>
 
   return (
@@ -59,6 +73,8 @@ const RepositoryItemDetail = () => {
       <FlatList
         style={[gs.marginTop5]}
         data={reviews}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
         keyExtractor={({id})=>id}
         ItemSeparatorComponent={Separator}
         renderItem={({item}) => <ReviewItem style={[]} item={item}/>}

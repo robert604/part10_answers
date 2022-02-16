@@ -152,5 +152,5 @@ const globalStyles = StyleSheet.create({
   },
 
 });
-//gs.margin5,gs.backgroundColorPrimary,gs.borderShape,gs.borderColorPrimary
+
 export default globalStyles;
